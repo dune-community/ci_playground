@@ -1,0 +1,28 @@
+
+stages:
+  - test
+
+.pytest:
+    before_script:
+        - apk update ; apk add git
+        - echo ${GITHUB_PR}
+        - if [ "x${GITHUB_PR}" != "x" ] ; then git fetch ${GITHUB_CLONE_URL} pull/${GITHUB_PR}/head:pr${GITHUB_PR} && git checkout pr${GITHUB_PR} ; fi
+    script:
+        - git show
+    only: ['branches', 'tags', 'triggers', 'merge-requests']
+
+3.6_numpy:
+    extends: .pytest
+    image: alpine
+    stage: test
+    variables:
+        PYMOR_PYTEST_MARKER: "numpy"
+        DOCKER_TAG: "3.6"
+3.6_None:
+    extends: .pytest
+    image: alpine
+    stage: test
+    variables:
+        PYMOR_PYTEST_MARKER: "None"
+        DOCKER_TAG: "3.6"
+
