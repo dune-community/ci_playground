@@ -4,6 +4,8 @@ merge:
   whitelist:
     labels: ["merge when ready"]
     comment_substrings: ["==MERGE_WHEN_READY=="]
+    comments: ["BD: merge"]
+
   blacklist:
     labels: ["do not merge"]
     comment_substrings: ["==DO_NOT_MERGE=="]
