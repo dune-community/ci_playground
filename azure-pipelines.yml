@@ -1,10 +1,13 @@
+# kate: indent-width 2;
+
 jobs:
-- job: 'Windows_CI'
+- job: foo
+  timeoutInMinutes: 240
   pool:
-    vmImage: 'VS2017-Win2016'
+    vmImage: 'Ubuntu-16.04'
+
+
   steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '$(python.version)'
-      architecture: 'x64'
+  - checkout: self
+    submodules: true
 
